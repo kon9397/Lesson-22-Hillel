@@ -28,9 +28,15 @@ function countMoney(data) {
     });
 }
 
+function getError() {
+    const result = document.querySelector('.result');
+    result.innerText = 'Чет пошло не так';
+}
+
 fetch('https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5')
     .then(response => response.json())
     .then(data => {
         getCurrency(data);
         countMoney(data);
-    });
+    })
+    .catch(err => getError(err));
